@@ -1,9 +1,17 @@
-/* Qns2). 
+/* 
+Problem: Second Highest Salary
+Source : Leetcode
+Difficulty: Easy
+*/
+
+/* Problem Statement: 
+
 Write a SQL query to get the second highest salary from the Employee table.
 For example, given the above Employee table, the query should return 200 as the
 second highest salary. If there is no second highest salary, then the query
 should return null.
-TABLE:
+
+Employee TABLE:
 +---------------------+
 | id |  Salary        |
 +---------------------+
@@ -20,11 +28,17 @@ TABLE:
 | 200 |               |
 +---------------------+
 
-Solution: Here
+*/
+/*
+Explaination:
+         Here
           300: First-Highest-Salary,
 		  200: Second-Highest-Salary
 		  100: Third-Highest-Salary 
-		  So, we'll use aggregated sql clause 
+*/
+
+/*Approach-1: 
+          So, we'll use aggregated sql clause 
           and subquery concept where,
           MAX(Salary excluding First-Highest-Salary), which will get by applying aggregated max clause over 
 		  inner query result, where inner query will be giving us the First-Highest-Salary
@@ -32,7 +46,10 @@ Solution: Here
 SELECT max(Salary) AS SecondHighestSalary FROM Employee
 WHERE Salary < ( SELECT max(Salary) FROM Employee);
 
--- OR USING THE CASE STATEMENTS --
+/* Approach -2:
+Using CASE and OFFSET to handle cases where the second highest salary does not exist.
+Here, OFFSET 1: means skip the first 1 records and then return whatever is asked.
+*/
 SELECT 
     CASE 
 	     WHEN COUNT(DISTINCT Salary) < 2 THEN NULL 

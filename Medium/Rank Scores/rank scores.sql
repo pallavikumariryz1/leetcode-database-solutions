@@ -58,6 +58,6 @@ Output:
 APPROACH: Scores' Rank USING DENSE_RANK()
 ----------------------------------------------------
 */
-SELECT scores,
+SELECT score,
        DENSE_RANK() OVER(ORDER BY scores DESC) as rank
 FROM Scores;
